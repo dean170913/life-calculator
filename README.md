@@ -28,11 +28,12 @@
 
 **👉 [点击这里，开始计算你的人生！](https://dean170913.github.io/life-calculator/)**
 
-*(请将 `你的用户名` 替换为你的 GitHub 用户名)*
 
 ## 🖼️ 界面截图
 
 ![人生计算器截图](https://raw.githubusercontent.com/dean170913/life-calculator/main/screenshot.png)
+![人生计算器截图](https://raw.githubusercontent.com/dean170913/life-calculator/main/screenshot2.png)
+![人生计算器截图](https://raw.githubusercontent.com/dean170913/life-calculator/main/screenshot3.png)
 
 *(你需要上传一张截图到仓库，并命名为 `screenshot.png`，然后替换上面的 `你的用户名`)*
 
