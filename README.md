@@ -36,8 +36,6 @@
 ![人生计算器截图](https://raw.githubusercontent.com/dean170913/life-calculator/main/screenshot3.png)
 ![人生计算器截图](https://raw.githubusercontent.com/dean170913/life-calculator/main/screenshot4.png)
 
-*(你需要上传一张截图到仓库，并命名为 `screenshot.png`，然后替换上面的 `你的用户名`)*
-
 ## 🛠️ 技术栈 (Tech Stack)
 
 *   **HTML5**: 负责网页的基本结构。
