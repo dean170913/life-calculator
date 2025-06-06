@@ -38,12 +38,6 @@
 
 *(你需要上传一张截图到仓库，并命名为 `screenshot.png`，然后替换上面的 `你的用户名`)*
 
-### 如何上传截图:
-1. 在你的电脑上截取一张满意的网站截图，并命名为 `screenshot.png`。
-2. 回到你的 GitHub 仓库页面。
-3. 点击 "Add file" -> "Upload files"。
-4. 将 `screenshot.png` 文件拖拽进去并提交。
-
 ## 🛠️ 技术栈 (Tech Stack)
 
 *   **HTML5**: 负责网页的基本结构。
