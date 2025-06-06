@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;700&display=swap');
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #f0f8ff;
+    --text-color: #333;
+    --bg-color: #f4f7f6;
+    --card-bg: #ffffff;
+    --progress-bar-color: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+    --shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 30px 40px;
+    width: 100%;
+    max-width: 700px;
+    text-align: center;
+}
+
+h1 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #777;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.input-section {
+    margin-bottom: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#calculate-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s;
+}
+
+#calculate-btn:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+#results {
+    text-align: left;
+}
+
+.result-summary {
+    background-color: var(--secondary-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+    border-left: 5px solid var(--primary-color);
+}
+
+.result-summary p {
+    margin: 5px 0;
+    font-size: 1.1em;
+}
+
+.progress-section, .time-allocation {
+    margin-bottom: 25px;
+}
+
+h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #444;
+}
+
+.progress-bar-container {
+    width: 100%;
+    background-color: #e9ecef;
+    border-radius: 20px;
+    height: 25px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background: var(--progress-bar-color);
+    border-radius: 20px;
+    transition: width 1.5s ease-out;
+}
+
+.progress-bar.bonus {
+    background: linear-gradient(90deg, #f7971e 0%, #ffd200 100%);
+}
+
+#life-progress-text, #life-remaining {
+    text-align: center;
+    margin-top: 8px;
+    color: #555;
+}
+
+/* 这就是解决排版问题的核心代码 */
+.time-allocation {
+    display: grid;
+    gap: 15px;
+    /* 默认单列布局 */
+    grid-template-columns: 1fr;
+}
+
+/* 当屏幕宽度大于等于600px时，应用两列布局 */
+@media (min-width: 600px) {
+    .time-allocation {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.card {
+    background: #fdfdfd;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 4px solid;
+    transition: transform 0.2s ease;
+}
+.card:hover {
+    transform: translateY(-5px);
+}
+
+#growth-time { border-color: #28a745; }
+#study-time { border-color: #ffc107; }
+#work-time { border-color: #dc3545; }
+#family-time { border-color: #17a2b8; }
+
+.card-title {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.assumptions {
+    margin-top: 30px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.assumptions ul {
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.hidden {
+    display: none;
+}
+
+.error {
+    color: white;
+    background-color: #e74c3c;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+.date-input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 6px;
+}
+
+.date-input-group input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    text-align: center;
+    width: 60px;
+    background: transparent;
+}
+
+.date-input-group input#month,
+.date-input-group input#day {
+    width: 40px;
+}
+
+.date-input-group span {
+    color: #ccc;
+    font-size: 16px;
+}
+
+.date-input-group:focus-within {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}

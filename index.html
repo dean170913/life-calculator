@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人生计算器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>人生计算器</h1>
+        <p class="subtitle">Time is the only currency you have, spend it wisely.</p>
+        
+        <div class="input-section">
+            <label for="year">请输入您的出生日期：</label>
+            <div class="date-input-group">
+                <input type="text" id="year" placeholder="YYYY" maxlength="4" inputmode="numeric">
+                <span>-</span>
+                <input type="text" id="month" placeholder="MM" maxlength="2" inputmode="numeric">
+                <span>-</span>
+                <input type="text" id="day" placeholder="DD" maxlength="2" inputmode="numeric">
+            </div>
+            <button id="calculate-btn">计算我的人生</button>
+        </div>
+
+        <div id="results" class="hidden">
+            <div class="result-summary">
+                <p id="current-age-summary"></p>
+                <p id="adult-status"></p>
+            </div>
+            
+            <div class="progress-section">
+                <h3>生命进度条 (假设活到80岁)</h3>
+                <div class="progress-bar-container">
+                    <div id="life-progress-bar" class="progress-bar"></div>
+                </div>
+                <p id="life-progress-text"></p>
+                <p id="life-remaining"></p>
+            </div>
+
+            <!-- ==================【这里是修改的核心部分】================== -->
+            <!-- 标题H3必须在布局容器DIV的外面 -->
+            <h3>人生时间分配（估算）</h3>
+            <div class="time-allocation">
+                <div class="card" id="growth-time"></div>
+                <div class="card" id="study-time"></div>
+                <div class="card" id="work-time"></div>
+                <div class="card" id="family-time"></div>
+            </div>
+            <!-- ========================================================== -->
+
+            <div class="assumptions">
+                <h4>计算基于以下假设：</h4>
+                <ul>
+                    <li>18岁成年</li>
+                    <li>6-22岁为主要学习阶段</li>
+                    <li>22-65岁为主要工作阶段</li>
+                    <li>陪伴家人的时间约占总清醒时间的1/3 (≈总时间的22%)</li>
+                    <li>预期寿命为80岁</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="error-message" class="error hidden"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
