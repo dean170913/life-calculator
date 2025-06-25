@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>人生计算器</title>
     <link rel="stylesheet" href="style.css">
+    <!-- 新增：引入Font Awesome图标库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -38,25 +40,36 @@
                 <p id="life-remaining"></p>
             </div>
 
-            <!-- ==================【这里是修改的核心部分】================== -->
-            <!-- 标题H3必须在布局容器DIV的外面 -->
             <h3>人生时间分配（估算）</h3>
             <div class="time-allocation">
                 <div class="card" id="growth-time"></div>
                 <div class="card" id="study-time"></div>
                 <div class="card" id="work-time"></div>
                 <div class="card" id="family-time"></div>
+                <!-- 新增：睡眠和吃喝时光卡片 -->
+                <div class="card" id="sleep-time"></div>
+                <div class="card" id="eat-time"></div>
             </div>
-            <!-- ========================================================== -->
+
+            <!-- 新增：人体趣味数据报告模块 -->
+            <div class="fun-facts-section">
+                <h3>您的人体趣味数据报告</h3>
+                <ul id="fun-facts-list">
+                    <!-- 内容将由JS动态生成 -->
+                </ul>
+            </div>
 
             <div class="assumptions">
                 <h4>计算基于以下假设：</h4>
+                <!-- 更新：增加了新的假设说明 -->
                 <ul>
                     <li>18岁成年</li>
                     <li>6-22岁为主要学习阶段</li>
                     <li>22-65岁为主要工作阶段</li>
                     <li>陪伴家人的时间约占总清醒时间的1/3 (≈总时间的22%)</li>
+                    <li>每日睡眠8小时，用餐2小时</li>
                     <li>预期寿命为80岁</li>
+                    <li>趣味数据为基于平均值的科学估算</li>
                 </ul>
             </div>
         </div>
