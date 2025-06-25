@@ -33,7 +33,8 @@ body {
     box-shadow: var(--shadow);
     padding: 30px 40px;
     width: 100%;
-    max-width: 700px;
+    /* 更新：增加宽度以容纳新内容 */
+    max-width: 800px;
     text-align: center;
 }
 
@@ -127,18 +128,22 @@ h3 {
     color: #555;
 }
 
-/* 这就是解决排版问题的核心代码 */
 .time-allocation {
     display: grid;
     gap: 15px;
-    /* 默认单列布局 */
     grid-template-columns: 1fr;
 }
 
-/* 当屏幕宽度大于等于600px时，应用两列布局 */
 @media (min-width: 600px) {
     .time-allocation {
+        /* 更新：当屏幕变宽时，可以容纳2或3列。2列看起来更舒适。 */
         grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (min-width: 768px) {
+    .time-allocation {
+        /* 在更宽的屏幕上，使用3列布局，这样6个卡片会排成2行 */
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
@@ -158,6 +163,9 @@ h3 {
 #study-time { border-color: #ffc107; }
 #work-time { border-color: #dc3545; }
 #family-time { border-color: #17a2b8; }
+/* 新增：新卡片的颜色 */
+#sleep-time { border-color: #6f42c1; }
+#eat-time { border-color: #fd7e14; }
 
 .card-title {
     font-weight: bold;
@@ -222,3 +230,37 @@ h3 {
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
+
+/* 新增：趣味数据报告模块样式 */
+.fun-facts-section {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    border-left: 5px solid #6f42c1; /* 紫色边框 */
+}
+
+#fun-facts-list {
+    list-style: none;
+    padding-left: 0;
+    text-align: left;
+}
+
+#fun-facts-list li {
+    padding: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-size: 1.05em;
+}
+
+#fun-facts-list li .fa-icon {
+    font-size: 1.5em;
+    width: 30px;
+    text-align: center;
+}
+#fun-facts-list li:nth-child(1) .fa-icon { color: #dc3545; } /* 心脏 */
+#fun-facts-list li:nth-child(2) .fa-icon { color: #fd7e14; } /* 食物 */
+#fun-facts-list li:nth-child(3) .fa-icon { color: #007bff; } /* 眼睛 */
+#fun-facts-list li:nth-child(4) .fa-icon { color: #28a745; } /* 循环 */
+#fun-facts-list li:nth-child(5) .fa-icon { color: #17a2b8; } /* 水滴 */
