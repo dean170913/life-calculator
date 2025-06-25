@@ -132,23 +132,34 @@ calculateBtn.addEventListener('click', () => {
     const today = new Date();
     birthDate.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
+
+    // --- 更新：未来日期的逻辑，结合您的版本和我们的新讨论 ---
     if (birthDate > today) {
-        // ... 未来日期的逻辑保持不变 ...
         const MS_PER_DAY = 1000 * 60 * 60 * 24;
         const diffYears = (birthDate - today) / MS_PER_DAY / 365.25;
         let futureMessage = '';
-        if (diffYears * 12 <= 9) {
-            futureMessage = '哇，未来的宝宝！您现在应该还在妈妈的肚子里听音乐、练拳脚吧？别急，外面很精彩！';
-        } else if (diffYears <= 2) {
-            futureMessage = '时空旅行者你好！按这个时间点，你的爸妈可能刚领完证，正在规划蜜月旅行呢。你的“订单”已提交，请耐心等待发货！';
-        } else if (diffYears <= 5) {
-            futureMessage = '这个时间点，你的爸妈可能正处于热恋期，还在看电影、约会、吵吵小架。你的存在，也许还是他们未来计划中的一个“小惊喜”哦！';
-        } else if (diffYears <= 15) {
-            futureMessage = '时空跳跃有点远了！此时你的爸妈可能还在为中考或高考奋斗，说不定正在为一道数学题发愁。他们可能认识，也可能还在各自的青春里。';
-        } else if (diffYears <= 22) {
+        
+        // 优先判断是否超过25年
+        if (diffYears > 25) {
+             const superFuturePrompts = [
+                '警告：时间虫洞过载！按这个时间点，构成你的原子还在宇宙的不同角落流浪，你的‘人生’项目甚至还没在上帝的服务器上立项呢！',
+                '时空坐标严重错误！这个时间点，你的爸妈可能都还没形成一个完整的细胞，大概率还以亿万分之一的形态，分别存在于你未来的爷爷奶奶体内。',
+                '喂，是未来户籍管理处吗？这里有个穿越者！按这个时间，你的出生申请还在‘孟婆汤’审批队列里，前面估计还有几十亿个号。请先返回你的时间线，耐心等待叫号！',
+                '来自未来的朋友，您来得太早了！此时你的爸妈可能自己都还是在玩泥巴的小屁孩，或者更准确地说，他们都还没出生。你的诞生，是一项需要跨越两代人的宏伟工程！',
+				'我的天，你这是从哪个世纪来的？！按这个时间线，你的爸妈可能还是......液体。嗯，你懂的。他们自己都还是个生物学上的概念呢！'
+            ];
+            futureMessage = getRandomMessage(superFuturePrompts);
+
+        } else if (diffYears > 15) {
             futureMessage = '超光速警告！在这个时间点，你的爸妈自己都还是未成年人，正忙着长大和被爸妈“混合双打”呢。你的“预购”请求过于超前了！';
+        } else if (diffYears > 5) {
+            futureMessage = '时空跳跃有点远了！此时你的爸妈可能还在为中考或高考奋斗，说不定正在为一道数学题发愁。他们可能认识，也可能还在各自的青春里。';
+        } else if (diffYears > 2) {
+            futureMessage = '这个时间点，你的爸妈可能正处于热恋期，还在看电影、约会、吵吵小架。你的存在，也许还是他们未来计划中的一个“小惊喜”哦！';
+        } else if (diffYears * 12 > 9) { // 沿用您原有的逻辑 >9个月
+            futureMessage = '时空旅行者你好！按这个时间点，你的爸妈可能刚领完证，正在规划蜜月旅行呢。你的“订单”已提交，请耐心等待发货！';
         } else {
-            futureMessage = '我的天，你这是从哪个世纪来的？！按这个时间线，你的爸妈可能还是......液体。嗯，你懂的。他们自己都还是个生物学上的概念呢！';
+            futureMessage = '哇，未来的宝宝！您现在应该还在妈妈的肚子里听音乐、练拳脚吧？别急，外面很精彩！';
         }
         errorMessage.textContent = futureMessage;
         errorMessage.classList.remove('hidden');
@@ -160,6 +171,7 @@ calculateBtn.addEventListener('click', () => {
     resultsDiv.classList.remove('hidden');
 
     // --- 2. 定义常量 ---
+    // (保留您所有的常量)
     const MS_PER_DAY = 1000 * 60 * 60 * 24;
     const DAYS_PER_YEAR = 365.25;
     const ADULT_AGE = 18;
@@ -174,6 +186,10 @@ calculateBtn.addEventListener('click', () => {
     const RETIREMENT_AGE = 65;
     const LIFE_EXPECTANCY_AGE = 80;
     const FAMILY_TIME_RATIO = 0.22;
+    // 新增：睡眠与用餐常量
+    const SLEEP_HOURS_PER_DAY = 8;
+    const EAT_HOURS_PER_DAY = 2;
+
 
     // --- 3. 核心计算 ---
     const totalDaysLived = Math.floor((today - birthDate) / MS_PER_DAY);
@@ -187,41 +203,20 @@ calculateBtn.addEventListener('click', () => {
     document.getElementById('current-age-summary').innerHTML = 
         `您已在这个世界上度过了 <strong>${totalDaysLived.toLocaleString()}</strong> 天，当前年龄为 <strong>${ageYears}</strong> 岁。`;
     
-    // --- 根据年龄显示随机提示语 ---
+    // --- 根据年龄显示随机提示语 (您的核心逻辑，完全保留) ---
     const adultStatus = document.getElementById('adult-status');
-    if (ageYears >= RETIREMENT_MESSAGE_AGE) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.retirement);
-        adultStatus.style.color = '#007bff';
-    } else if (ageYears >= 51) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.preRetirement);
-        adultStatus.style.color = '#fd7e14';
-    } else if (ageYears >= 41) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.midlife);
-        adultStatus.style.color = '#6f42c1';
-    } else if (ageYears >= 31) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.established);
-        adultStatus.style.color = '#007bff';
-    } else if (ageYears >= 22) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.earlyCareer);
-        adultStatus.style.color = '#28a745';
-    } else if (ageYears >= ADULT_AGE) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.youngAdult);
-        adultStatus.style.color = 'green';
-    } else if (ageYears >= PUBERTY_START_AGE) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.puberty);
-        adultStatus.style.color = '#20c997';
-    } else if (ageYears >= KINDERGARTEN_END_AGE) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.primarySchool);
-        adultStatus.style.color = '#ffc107';
-    } else if (ageYears >= INFANCY_END_AGE) {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.kindergarten);
-        adultStatus.style.color = '#ff69b4';
-    } else {
-        adultStatus.innerHTML = getRandomMessage(stageMessages.infancy);
-        adultStatus.style.color = '#add8e6';
-    }
+    if (ageYears >= RETIREMENT_MESSAGE_AGE) { adultStatus.innerHTML = getRandomMessage(stageMessages.retirement); adultStatus.style.color = '#007bff'; } 
+    else if (ageYears >= 51) { adultStatus.innerHTML = getRandomMessage(stageMessages.preRetirement); adultStatus.style.color = '#fd7e14'; } 
+    else if (ageYears >= 41) { adultStatus.innerHTML = getRandomMessage(stageMessages.midlife); adultStatus.style.color = '#6f42c1'; } 
+    else if (ageYears >= 31) { adultStatus.innerHTML = getRandomMessage(stageMessages.established); adultStatus.style.color = '#007bff'; } 
+    else if (ageYears >= 22) { adultStatus.innerHTML = getRandomMessage(stageMessages.earlyCareer); adultStatus.style.color = '#28a745'; } 
+    else if (ageYears >= ADULT_AGE) { adultStatus.innerHTML = getRandomMessage(stageMessages.youngAdult); adultStatus.style.color = 'green'; } 
+    else if (ageYears >= PUBERTY_START_AGE) { adultStatus.innerHTML = getRandomMessage(stageMessages.puberty); adultStatus.style.color = '#20c997'; } 
+    else if (ageYears >= KINDERGARTEN_END_AGE) { adultStatus.innerHTML = getRandomMessage(stageMessages.primarySchool); adultStatus.style.color = '#ffc107'; } 
+    else if (ageYears >= INFANCY_END_AGE) { adultStatus.innerHTML = getRandomMessage(stageMessages.kindergarten); adultStatus.style.color = '#ff69b4'; } 
+    else { adultStatus.innerHTML = getRandomMessage(stageMessages.infancy); adultStatus.style.color = '#add8e6'; }
     
-    // ... [后续计算和显示逻辑保持不变] ...
+    // --- 原有计算逻辑 ---
     const growthEndDate = new Date(birthDate);
     growthEndDate.setFullYear(birthDate.getFullYear() + ADULT_AGE);
     const growthDays = Math.floor((Math.min(today, growthEndDate) - birthDate) / MS_PER_DAY);
@@ -242,6 +237,12 @@ calculateBtn.addEventListener('click', () => {
         workDays = Math.floor((Math.min(today, retirementDate) - workStartDate) / MS_PER_DAY);
     }
     const familyDays = Math.floor(totalDaysLived * FAMILY_TIME_RATIO);
+    
+    // 新增：睡眠与用餐计算
+    const sleepDays = Math.floor(totalDaysLived * (SLEEP_HOURS_PER_DAY / 24));
+    const eatDays = Math.floor(totalDaysLived * (EAT_HOURS_PER_DAY / 24));
+
+    // --- 生命进度条逻辑 (完全保留) ---
     const deathDate = new Date(birthDate);
     deathDate.setFullYear(birthDate.getFullYear() + LIFE_EXPECTANCY_AGE);
     const totalLifeDays = LIFE_EXPECTANCY_AGE * DAYS_PER_YEAR;
@@ -263,6 +264,8 @@ calculateBtn.addEventListener('click', () => {
         lifeProgressText.textContent = '生命进度已超越100%，恭喜！';
         lifeRemaining.innerHTML = `<strong>福寿绵长，生命的奇迹！</strong><br>您已荣耀地超越80岁，您生命中的每一天都是一份珍贵的礼物。<br>您已在80岁的基础上，额外走过了 <strong>${bonusDays.toLocaleString()}</strong> 天（约 ${bonusYears} 年）。<br>愿您日日安康，笑口常开！`;
     }
+
+    // --- 时间分配卡片渲染 ---
     const formatCard = (title, days) => {
         const years = (days / DAYS_PER_YEAR).toFixed(1);
         return `<div class="card-title">${title}</div>您已用去 <strong>${days.toLocaleString()}</strong> 天<br>约等于 <strong>${years}</strong> 年`;
@@ -271,4 +274,26 @@ calculateBtn.addEventListener('click', () => {
     document.getElementById('study-time').innerHTML = formatCard('📚 学习时光', Math.max(0, studyDays));
     document.getElementById('work-time').innerHTML = formatCard('💼 工作时光', Math.max(0, workDays));
     document.getElementById('family-time').innerHTML = formatCard('❤️ 陪伴家人', familyDays);
+    // 新增：渲染新卡片
+    document.getElementById('sleep-time').innerHTML = formatCard('😴 睡眠时光', sleepDays);
+    document.getElementById('eat-time').innerHTML = formatCard('🍜 吃喝时光', eatDays);
+
+    // --- 新增：人体趣味数据模块渲染 ---
+    const funFactsList = document.getElementById('fun-facts-list');
+    const heartBeats = totalDaysLived * 24 * 60 * 75;
+    const foodIntakeTon = (totalDaysLived * 1.8) / 1000;
+    const blinks = totalDaysLived * 16 * 60 * 15;
+    const wasteTon = (totalDaysLived * 0.35) / 1000;
+    const formatBigNumber = (num) => {
+        if (num > 1_000_000_000) return `${(num / 1_000_000_000).toFixed(1)} 亿`;
+        if (num > 100_000) return `${(num / 10_000).toFixed(1)} 万`;
+        return num.toLocaleString();
+    };
+    funFactsList.innerHTML = `
+        <li><i class="fas fa-heartbeat fa-icon"></i><span>您的心脏已为您跳动了约 <strong>${formatBigNumber(heartBeats)}</strong> 次，每一次都是生命的节拍。</span></li>
+        <li><i class="fas fa-utensils fa-icon"></i><span>您大约吃掉了 <strong>${foodIntakeTon.toFixed(1)} 吨</strong> 食物，相当于 <strong>${(foodIntakeTon / 5).toFixed(1)}</strong> 头成年大象的重量！</span></li>
+        <li><i class="fas fa-eye fa-icon"></i><span>您的眼睛已眨了约 <strong>${formatBigNumber(blinks)}</strong> 次，捕捉了无数值得回味的风景。</span></li>
+        <li><i class="fas fa-recycle fa-icon"></i><span>您制造了约 <strong>${wasteTon.toFixed(1)} 吨</strong> 的“肥料”，为生态循环做出了无声的贡献。</span></li>
+        <li><i class="fas fa-tint fa-icon"></i><span>您流下的汗水与泪水，浇灌了您的人生之路，每一滴都独一无二，无法用数字衡量。</span></li>
+    `;
 });
